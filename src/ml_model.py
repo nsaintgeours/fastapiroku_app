@@ -6,11 +6,13 @@ from typing import List
 
 import requests
 
+MODEL_API_URL = 'https://fastapiroku-ml.herokuapp.com/predict'
+
 
 def predict(x: List[float]) -> float or str:
     try:
         response = requests.post(
-            url=os.getenv("MODEL_API"),
+            url=MODEL_API_URL,
             headers={'content-type': 'application/json'},
             json={"data": [x]},
         )
