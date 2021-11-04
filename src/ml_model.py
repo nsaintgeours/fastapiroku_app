@@ -1,21 +1,26 @@
 """
 Function that sends a request to the MLflow model REST API to get a prediction from some input data.
 """
-import os
-from typing import List
 
 import requests
 
+MODEL_API_URL = 'https://fastapiroku-ml.herokuapp.com/predict'
 
-def predict(x: List[float]) -> float or str:
+
+def predict(x1: float, x2: float, x3: float, x4: float) -> float or str:
     try:
         response = requests.post(
-            url=os.getenv("MODEL_API"),
+            url=MODEL_API_URL,
             headers={'content-type': 'application/json'},
-            json={"data": [x]},
+            params={"x1": x1, "x2": x2, "x3": x3, "x4": x4},
         )
         response.raise_for_status()
-        output = str(response.json()[0])
+        output = response.json()['prediction']
     except (requests.HTTPError, IOError) as err:
         output = str(err)
     return output
+
+
+if __name__ == '__main__':
+    # Example of model prediction
+    print(predict(x1=1, x2=2, x3=1, x4=10))
