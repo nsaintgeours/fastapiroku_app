@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
 
+from pathlib import Path
 from ml_model import predict
 
 # App title
@@ -14,6 +15,7 @@ x3 = st.sidebar.number_input('Enter input value X3')
 x4 = st.sidebar.number_input('Enter input value X4')
 
 # Display model output
+st.write(f'Path file: {Path(__file__)}')
 st.write(f'Sum of inputs = {x1 + x2 + x3 + x4}')
 st.write(f'Model prediction Y = {predict(x1=x1, x2=x2, x3=x3, x4=x4)}')
 
